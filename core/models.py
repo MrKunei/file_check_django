@@ -25,5 +25,8 @@ class Logs(models.Model):
 
     file = models.ForeignKey(File, on_delete=models.CASCADE)
     logs = models.TextField()
+
     created_at = models.DateTimeField(auto_now_add=True)
+
+    send_mail = models.BooleanField(default=File)
 

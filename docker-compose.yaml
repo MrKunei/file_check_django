@@ -1,0 +1,36 @@
+version: '3.8'
+
+volumes:
+  postgres_data:
+
+services:
+#  postgres:
+#    image: postgres:14.6-alpine
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    env_file:
+#      - ./.env
+
+  redis:
+    image: redis
+    restart: always
+
+  app:
+#    restart: always
+    build:
+      context: .
+    ports:
+      - '8000:8000'
+    command: python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+
+#  worker:
+#    restart: always
+#    build:
+#      context: .
+#    command: [ 'celery', '-A', 'config', 'worker', '-l' ,'INFO']
+#
+#  celery-beats:
+#    restart: always
+#    build:
+#      context: .
+#    command: [ 'celery', '-A', 'config', 'beat', '-l', 'INFO']

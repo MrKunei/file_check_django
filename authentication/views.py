@@ -14,9 +14,13 @@ class SignupView(SuccessMessageMixin, CreateView):
     success_message = 'Account created successfully!'
 
 
-class SigninView(LoginView):
-    form_class = AuthenticationForm
+class SigninView(SuccessMessageMixin, LoginView):
     template_name = 'authentication/signin.html'
+    success_message = 'You have successfully logged in!'
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'The username or password you entered is incorrect!')
+        return super().form_invalid(form)
 
 
 class SignoutView(SuccessMessageMixin, LogoutView):

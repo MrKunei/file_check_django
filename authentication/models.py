@@ -1,11 +1,11 @@
-from django.contrib.auth.base_user import AbstractBaseUser
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from authentication.managers import UserManager
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
 
-    username = models.CharField(max_length=225, help_text='Your username')
     email = models.EmailField(unique=True, help_text='Your email')
     is_verify = models.BooleanField(default=False, verbose_name='account verified')
 

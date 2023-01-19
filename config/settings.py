@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'authentication.apps.AuthenticationConfig',
     'core.apps.CoreConfig',
 
@@ -83,6 +84,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "HOST": os.environ.get("DB_HOST"),
+#         "NAME": os.environ.get("POSTGRES_NAME"),
+#         "PORT": os.environ.get("DB_PORT"),
+#         "USER": os.environ.get("DB_USER"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD"),
+#     },
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -124,6 +136,9 @@ STATICFILES_DIRS = [
 ]
 
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -137,3 +152,15 @@ AUTHENTICATION_BACKENDS = ('authentication.backends.EmailBackend',
 LOGIN_REDIRECT_URL = 'core:files_list_view'
 LOGOUT_REDIRECT_URL = 'authentication:signin_view'
 
+# Email
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+
+# Celery
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'redis://localhost:6379')
+CELERY_BROKER_BACKEND = os.environ.get('CELERY_BROKER', 'redis://localhost:6379')
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'

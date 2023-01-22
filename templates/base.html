@@ -10,21 +10,22 @@
     <link rel="stylesheet" href="{% static 'css/alert.css' %}" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-    <title>Enkins</title>
+    <title>File Check</title>
   </head>
   <body>
 
-<!--    {% if messages %}-->
+    {% if messages %}
 
-<!--    {% for message in messages %}-->
-<!--    <div class="alert  alert&#45;&#45;{{ message.tags }}">-->
-<!--        <p class="alert__message">{{message}}</p>-->
-<!--        <button class="alert__close">✖</button>-->
-<!--    </div>-->
+    {% for message in messages %}
+        <div class="col-sm-6 col-md-6">
+          <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <p class="alert_message">{{message}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="✖"></button>
+          </div>
+        </div>
+    {% endfor %}
 
-<!--    {% endfor %}-->
-
-<!--    {% endif %}-->
+    {% endif %}
 
     {% block content %}{% endblock %}
 

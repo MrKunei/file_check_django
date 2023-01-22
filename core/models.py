@@ -20,13 +20,20 @@ class File(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def delete(self, *args, **kwargs):
+        storage, path = self.file.storage, self.file.path
+        super().delete(*args, **kwargs)
+        storage.delete(path)
+
+
 
 class Logs(models.Model):
 
     file = models.ForeignKey(File, on_delete=models.CASCADE)
     logs = models.TextField()
 
+    send_mail = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
-    send_mail = models.BooleanField(default=File)
 

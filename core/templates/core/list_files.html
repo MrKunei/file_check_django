@@ -18,9 +18,7 @@
                 <a href="{% url 'core:add_file_view' %}"
                    class="btn btn-success me-5">Add New File</a>
 
-                <span class="me-3" style="font-size: 20px;"><i
-                        class="bi bi-person rounded-circle me-1"
-                        style="font-size:20px;"></i>{{ user.username }}</span>
+                <a href="#" class="btn btn-outline-dark me-3"><i class="bi bi-person me-1"></i>{{ user.username }}</a>
 
                 <a href="{% url 'authentication:signout_view' %}"
                    class="btn btn-outline-danger">Sign Out</a>
@@ -33,7 +31,7 @@
 <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4">List Files</p>
 
 <div class="row d-flex justify-content-center align-items-center h-100 mt-3">
-    <div class="col-lg-12 col-xl-11">
+    <div class="col-lg-10 col-xl-10">
         <div class="card text-black" style="border-radius: 25px;">
 
             <div class="card-body p-md-5">
@@ -53,7 +51,7 @@
                         {% for row in object_list %}
                         <tr>
                             <td>
-                                {{ row.file }}
+                                {{ row.file.name }}
                             </td>
                             <td>
                                 {% if row.get_status_display == "new" %}
@@ -72,7 +70,7 @@
                             </td>
                             <td>
                                 <a href="{% url 'core:detail_file_view' row.id %}"
-                                   class="btn btn-info btn-xs">Detail Info</a>
+                                   class="btn btn-info btn-xs">Logs Info</a>
                                 <a href="{% url 'core:update_file_view' row.id %}"
                                    class="btn btn-warning btn-xs">Edit</a>
                                 <a href="{% url 'core:delete_file_view' row.id %}"

@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_celery_beat',
     'authentication.apps.AuthenticationConfig',
     'core.apps.CoreConfig',
 
@@ -77,23 +81,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
+    # 'default': {
+    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "HOST": os.environ.get("POSTGRES_HOST"),
+    #     "NAME": os.environ.get("POSTGRES_NAME"),
+    #     "PORT": os.environ.get("POSTGRES_PORT"),
+    #     "USER": os.environ.get("POSTGRES_USER"),
+    #     "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+    # },
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": os.environ.get("DB_HOST"),
-#         "NAME": os.environ.get("POSTGRES_NAME"),
-#         "PORT": os.environ.get("DB_PORT"),
-#         "USER": os.environ.get("DB_USER"),
-#         "PASSWORD": os.environ.get("DB_PASSWORD"),
-#     },
-# }
 
 
 # Password validation
@@ -153,14 +155,18 @@ LOGIN_REDIRECT_URL = 'core:files_list_view'
 LOGOUT_REDIRECT_URL = 'authentication:signin_view'
 
 # Email
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = os.environ.get("EMAIL_PORT")
 
+
 # Celery
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'redis://localhost:6379')
-CELERY_BROKER_BACKEND = os.environ.get('CELERY_BROKER', 'redis://localhost:6379')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER')
+CELERY_BROKER_BACKEND = os.environ.get('CELERY_BROKER')
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

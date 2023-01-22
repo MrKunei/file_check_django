@@ -13,6 +13,14 @@
 
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
+                    {% if messages %}
+                      {% for message in messages %}
+                        <div class="alert alert-danger" role='alert'>
+                            {{ message }}
+                        </div>
+                      {% endfor %}
+                  {% endif %}
+
                   <form method="POST" action="{% url 'authentication:signup_view' %}" class="mx-1 mx-md-4" >
 
                     {% csrf_token %}
@@ -48,8 +56,8 @@
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <input type="submit" class="btn btn-primary btn-lg" value="Sign Up">
                     </div>
-
                   </form>
+
                   <div class="text-center mt-2 px-5 mx-auto">
                     <p class="have__an__account py-3">Have an account? <a href="{% url 'authentication:signin_view' %}" class="text-decoration-none">Sign in</a></p>
                   </div>

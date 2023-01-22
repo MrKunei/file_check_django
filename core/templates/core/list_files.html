@@ -18,7 +18,9 @@
                 <a href="{% url 'core:add_file_view' %}"
                    class="btn btn-success me-5">Add New File</a>
 
-                <a href="#" class="btn btn-outline-dark me-3"><i class="bi bi-person me-1"></i>{{ user.username }}</a>
+                <span class="me-3" style="font-size: 20px;"><i
+                        class="bi bi-person me-1"
+                        style="font-size:20px;"></i>{{ user.username }}</span>
 
                 <a href="{% url 'authentication:signout_view' %}"
                    class="btn btn-outline-danger">Sign Out</a>

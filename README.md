@@ -6,6 +6,7 @@
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
 [![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?style=flat-square&logo=PostgreSQL)](https://www.postgresql.org/)
 [![Celery](https://img.shields.io/badge/-Celery-464646?style=flat-square&logo=Celery)](https://www.celeryq.dev/)
+[![Redis](https://img.shields.io/badge/-Redis-464646?style=flat-square&logo=Redis)](https://www.redis.io/)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
 
 ---
